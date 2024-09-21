@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -54,7 +57,9 @@ public class GeocodeController {
                         .build()
                 )
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<LocationModel>>() {});
+                .bodyToMono(new ParameterizedTypeReference<List<LocationModel>>(){})
+                .onErrorReturn(Collections.emptyList());
+                
     }
     
     

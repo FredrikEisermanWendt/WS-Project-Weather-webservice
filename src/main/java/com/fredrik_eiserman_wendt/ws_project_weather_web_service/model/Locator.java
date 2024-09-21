@@ -2,11 +2,11 @@ package com.fredrik_eiserman_wendt.ws_project_weather_web_service.model;
 
 public class Locator {
     private String description;
-    private double lon;
-    private double lat;
+    private String lon;
+    private String lat;
     
     
-    public Locator(String description, double lon, double lat) {
+    public Locator(String description, String  lon, String lat) {
         this.description = description;
         this.lon = lon;
         this.lat = lat;
@@ -23,22 +23,22 @@ public class Locator {
     }
     
     
-    public double getLon() {
+    public String getLon() {
         return lon;
     }
     
     
-    public void setLon(double lon) {
+    public void setLon(String lon) {
         this.lon = lon;
     }
     
     
-    public double getLat() {
+    public String getLat() {
         return lat;
     }
     
     
-    public void setLat(double lat) {
+    public void setLat(String lat) {
         this.lat = lat;
     }
     
