@@ -4,15 +4,17 @@ import java.util.List;
 
 public class WeatherModel {
     
-    private double latitude;
-    private double longitude;
-    private String generationtime_ms;
-    private String utc_offset_seconds;
-    private String timezone;
-    private String timezone_abbreviation;
-    private String elevation;
-    private HourlyUnits hourlyUnits;
-    private Hourly hourly;
+    public double latitude;
+    public double longitude;
+    public String generationtime_ms;
+    public String utc_offset_seconds;
+    public String timezone;
+    public String timezone_abbreviation;
+    public String elevation;
+    public HourlyUnits hourly_units;
+    public Hourly hourly;
+    public DailyUnits daily_units;
+    public Daily daily;
     
     
     public double getLatitude() {
@@ -86,12 +88,12 @@ public class WeatherModel {
     
     
     public HourlyUnits getHourlyUnits() {
-        return hourlyUnits;
+        return hourly_units;
     }
     
     
     public void setHourlyUnits(HourlyUnits hourlyUnits) {
-        this.hourlyUnits = hourlyUnits;
+        this.hourly_units = hourlyUnits;
     }
     
     
@@ -105,10 +107,35 @@ public class WeatherModel {
     }
     
     
-    // TODO: 2024-09-21 add more units
+    public DailyUnits getDailyUnits() {
+        return daily_units;
+    }
+    
+    
+    public void setDailyUnits(DailyUnits dailyUnits) {
+        this.daily_units = dailyUnits;
+    }
+    
+    
+    public Daily getDaily() {
+        return daily;
+    }
+    
+    
+    public void setDaily(Daily daily) {
+        this.daily = daily;
+    }
+    
+    
     public class HourlyUnits {
-        private String time;
-        private String temperature_2m;
+        
+        public String time;
+        public String temperature_2m;
+        public String relative_humidity_2m;
+        public String apparent_temperature;
+        public String precipitation;
+        public String wind_speed_10m;
+        public String wind_direction_10m;
         
         
         public String getTime() {
@@ -131,12 +158,127 @@ public class WeatherModel {
         }
         
         
+        public String getRelative_humidity_2m() {
+            return relative_humidity_2m;
+        }
+        
+        
+        public void setRelative_humidity_2m(String relative_humidity_2m) {
+            this.relative_humidity_2m = relative_humidity_2m;
+        }
+        
+        
+        public String getApparent_temperature() {
+            return apparent_temperature;
+        }
+        
+        
+        public void setApparent_temperature(String apparent_temperature) {
+            this.apparent_temperature = apparent_temperature;
+        }
+        
+        
+        public String getPrecipitation() {
+            return precipitation;
+        }
+        
+        
+        public void setPrecipitation(String precipitation) {
+            this.precipitation = precipitation;
+        }
+        
+        
+        public String getWind_speed_10m() {
+            return wind_speed_10m;
+        }
+        
+        
+        public void setWind_speed_10m(String wind_speed_10m) {
+            this.wind_speed_10m = wind_speed_10m;
+        }
+        
+        
+        public String getWind_direction_10m() {
+            return wind_direction_10m;
+        }
+        
+        
+        public void setWind_direction_10m(String wind_direction_10m) {
+            this.wind_direction_10m = wind_direction_10m;
+        }
+        
+        
     }
     
     
     public class Hourly {
-        private List<String> time;
-        private List<String> temperature_2m;
+        public List<String> time;
+        public List<Double> temperature_2m;
+        public List<Double> relative_humidity_2m;
+        public List<Double> apparent_temperature;
+        public List<Double> precipitation;
+        public List<Double> wind_speed_10m;
+        public List<Double> wind_direction_10m;
+        
+        
+        public List<Double> getTemperature_2m() {
+            return temperature_2m;
+        }
+        
+        
+        public void setTemperature_2m(List<Double> temperature_2m) {
+            this.temperature_2m = temperature_2m;
+        }
+        
+        
+        public List<Double> getRelative_humidity_2m() {
+            return relative_humidity_2m;
+        }
+        
+        
+        public void setRelative_humidity_2m(List<Double> relative_humidity_2m) {
+            this.relative_humidity_2m = relative_humidity_2m;
+        }
+        
+        
+        public List<Double> getApparent_temperature() {
+            return apparent_temperature;
+        }
+        
+        
+        public void setApparent_temperature(List<Double> apparent_temperature) {
+            this.apparent_temperature = apparent_temperature;
+        }
+        
+        
+        public List<Double> getPrecipitation() {
+            return precipitation;
+        }
+        
+        
+        public void setPrecipitation(List<Double> precipitation) {
+            this.precipitation = precipitation;
+        }
+        
+        
+        public List<Double> getWind_speed_10m() {
+            return wind_speed_10m;
+        }
+        
+        
+        public void setWind_speed_10m(List<Double> wind_speed_10m) {
+            this.wind_speed_10m = wind_speed_10m;
+        }
+        
+        
+        public List<Double> getWind_direction_10m() {
+            return wind_direction_10m;
+        }
+        
+        
+        public void setWind_direction_10m(List<Double> wind_direction_10m) {
+            this.wind_direction_10m = wind_direction_10m;
+        }
         
         
         public List<String> getTime() {
@@ -149,13 +291,193 @@ public class WeatherModel {
         }
         
         
-        public List<String> getTemperature_2m() {
-            return temperature_2m;
+    }
+    
+    public class Daily {
+        
+        public List<String> time;
+        public List<Double> temperature_2m_max;
+        public List<Double> temperature_2m_min;
+        public List<Double> daylight_duration;
+        public List<Integer> precipitation_sum;
+        public List<Integer> precipitation_hours;
+        public List<Double> wind_speed_10m_max;
+        public List<Integer> wind_direction_10m_dominant;
+        
+        
+        public List<String> getTime() {
+            return time;
         }
         
         
-        public void setTemperature_2m(List<String> temperature_2m) {
-            this.temperature_2m = temperature_2m;
+        public void setTime(List<String> time) {
+            this.time = time;
+        }
+        
+        
+        public List<Double> getTemperature_2m_max() {
+            return temperature_2m_max;
+        }
+        
+        
+        public void setTemperature_2m_max(List<Double> temperature_2m_max) {
+            this.temperature_2m_max = temperature_2m_max;
+        }
+        
+        
+        public List<Double> getTemperature_2m_min() {
+            return temperature_2m_min;
+        }
+        
+        
+        public void setTemperature_2m_min(List<Double> temperature_2m_min) {
+            this.temperature_2m_min = temperature_2m_min;
+        }
+        
+        
+        public List<Double> getDaylight_duration() {
+            return daylight_duration;
+        }
+        
+        
+        public void setDaylight_duration(List<Double> daylight_duration) {
+            this.daylight_duration = daylight_duration;
+        }
+        
+        
+        public List<Integer> getPrecipitation_sum() {
+            return precipitation_sum;
+        }
+        
+        
+        public void setPrecipitation_sum(List<Integer> precipitation_sum) {
+            this.precipitation_sum = precipitation_sum;
+        }
+        
+        
+        public List<Integer> getPrecipitation_hours() {
+            return precipitation_hours;
+        }
+        
+        
+        public void setPrecipitation_hours(List<Integer> precipitation_hours) {
+            this.precipitation_hours = precipitation_hours;
+        }
+        
+        
+        public List<Double> getWind_speed_10m_max() {
+            return wind_speed_10m_max;
+        }
+        
+        
+        public void setWind_speed_10m_max(List<Double> wind_speed_10m_max) {
+            this.wind_speed_10m_max = wind_speed_10m_max;
+        }
+        
+        
+        public List<Integer> getWind_direction_10m_dominant() {
+            return wind_direction_10m_dominant;
+        }
+        
+        
+        public void setWind_direction_10m_dominant(List<Integer> wind_direction_10m_dominant) {
+            this.wind_direction_10m_dominant = wind_direction_10m_dominant;
+        }
+        
+        
+        
+    }
+    
+    
+    public class DailyUnits {
+        
+        public String time;
+        public String temperature_2m_max;
+        public String temperature_2m_min;
+        public String daylight_duration;
+        public String precipitation_sum;
+        public String precipitation_hours;
+        public String wind_speed_10m_max;
+        public String wind_direction_10m_dominant;
+        
+        
+        public String getTime() {
+            return time;
+        }
+        
+        
+        public void setTime(String time) {
+            this.time = time;
+        }
+        
+        
+        public String getTemperature_2m_max() {
+            return temperature_2m_max;
+        }
+        
+        
+        public void setTemperature_2m_max(String temperature_2m_max) {
+            this.temperature_2m_max = temperature_2m_max;
+        }
+        
+        
+        public String getTemperature_2m_min() {
+            return temperature_2m_min;
+        }
+        
+        
+        public void setTemperature_2m_min(String temperature_2m_min) {
+            this.temperature_2m_min = temperature_2m_min;
+        }
+        
+        
+        public String getDaylight_duration() {
+            return daylight_duration;
+        }
+        
+        
+        public void setDaylight_duration(String daylight_duration) {
+            this.daylight_duration = daylight_duration;
+        }
+        
+        
+        public String getPrecipitation_sum() {
+            return precipitation_sum;
+        }
+        
+        
+        public void setPrecipitation_sum(String precipitation_sum) {
+            this.precipitation_sum = precipitation_sum;
+        }
+        
+        
+        public String getPrecipitation_hours() {
+            return precipitation_hours;
+        }
+        
+        
+        public void setPrecipitation_hours(String precipitation_hours) {
+            this.precipitation_hours = precipitation_hours;
+        }
+        
+        
+        public String getWind_speed_10m_max() {
+            return wind_speed_10m_max;
+        }
+        
+        
+        public void setWind_speed_10m_max(String wind_speed_10m_max) {
+            this.wind_speed_10m_max = wind_speed_10m_max;
+        }
+        
+        
+        public String getWind_direction_10m_dominant() {
+            return wind_direction_10m_dominant;
+        }
+        
+        
+        public void setWind_direction_10m_dominant(String wind_direction_10m_dominant) {
+            this.wind_direction_10m_dominant = wind_direction_10m_dominant;
         }
         
         

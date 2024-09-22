@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/location")
+@RequestMapping("/v1/geocode")
 public class GeocodeController {
 
 //https://geocode.maps.co/search?q=555+5th+Ave+New+York+NY+10017+US&api_key=api_key

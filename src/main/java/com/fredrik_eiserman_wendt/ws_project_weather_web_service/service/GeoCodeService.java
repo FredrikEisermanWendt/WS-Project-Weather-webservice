@@ -30,6 +30,6 @@ public class GeoCodeService {
         
         return locations.getFirst();
     }
-    
+
     
 }
