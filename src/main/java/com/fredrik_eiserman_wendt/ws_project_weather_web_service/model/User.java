@@ -62,4 +62,11 @@ public class User {
     }
     
     
+    // TODO: 2024-09-23 felhantering
+    public boolean addLocationToList(UserFavoriteLocation location){
+        favoriteLocations.add(location);
+        return true;
+    }
+    
+    
 }
