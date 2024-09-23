@@ -19,7 +19,9 @@ public enum WeatherUriParam {
     DAILY_PRECEPITATION_SUM("precipitation_sum"),
     DAILY_PRECIPITATION_HOURS("precipitation_hours"),
     DAILY_WIND_SPEED_10M_MAX("wind_speed_10m_max"),
-    DAILY_WIND_DIRECTION_10M_DOMINANT("wind_direction_10m_dominant");
+    DAILY_WIND_DIRECTION_10M_DOMINANT("wind_direction_10m_dominant"),
+    HOURLY_DEFAULT_WEATHER("temperature_2m,relative_humidity_2m,apparent_temperature,apparent_temperature,wind_speed_10m,wind_direction_10m"),
+    DAILY_DEFAULT_WEATHER("temperature_2m_max,temperature_2m_min,daylight_duration,precipitation_sum,precipitation_hours,wind_speed_10m_max,wind_direction_10m_dominant");
     
     public final String uriParam;
     

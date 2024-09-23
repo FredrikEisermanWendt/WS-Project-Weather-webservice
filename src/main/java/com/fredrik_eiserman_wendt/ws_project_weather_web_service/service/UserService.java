@@ -26,18 +26,18 @@ public class UserService {
     }
     
     
-    // TODO: 2024-09-22 optional
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
         
     }
     
     
-    // TODO: 2024-09-22 optional
     public User saveUser(User user) {
         return userRepository.save(user);
     }
     
+    
+    // TODO: 2024-09-23 test cleaner code
     @Transactional
     public User addFavoriteLocation(Long id, UserFavoriteLocation location) {
 //        return userRepository.findById(id)

@@ -3,9 +3,7 @@ package com.fredrik_eiserman_wendt.ws_project_weather_web_service.controller;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.LocationModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -46,8 +44,10 @@ public class GeocodeController {
     }
     
     
-    @GetMapping
-    public Mono<List<LocationModel>> fetchLocation(String countryCode, String city, String state){
+    @GetMapping("/{countrycode}/{city}")
+    public Mono<List<LocationModel>> fetchLocation(@PathVariable("countrycode") String countryCode,
+                                                   @PathVariable("city") String city,
+                                                   @RequestParam(value = "state", required = false) String state){
         return webClient.get()
                 .uri(location -> location
                         .queryParam("country", countryCode)
