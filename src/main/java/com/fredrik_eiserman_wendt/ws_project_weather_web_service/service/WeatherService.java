@@ -34,7 +34,7 @@ public class WeatherService {
     
     
     public LocationModel fetchLocation(String countryCode, String city, String state) {
-        return geoCodeService.getLocator(countryCode, city, state);
+        return geoCodeService.getCoordinateLocator(countryCode, city, state);
     }
     
     
