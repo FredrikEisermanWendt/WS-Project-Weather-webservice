@@ -1,5 +1,6 @@
 package com.fredrik_eiserman_wendt.ws_project_weather_web_service.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,7 +14,9 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<UserFavoriteLocation> favoriteLocations;
     
     

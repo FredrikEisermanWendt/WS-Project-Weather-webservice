@@ -116,7 +116,7 @@ public class WeatherController {
             return Mono.just(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
         }
         
-        userFavoriteLocations = userController.getUserById(id).getFavoriteLocations();
+        userFavoriteLocations = userController.getUserById(id).getBody().getFavoriteLocations();
         for (UserFavoriteLocation u : userFavoriteLocations) {
             monoReturnList.add(
                     webClient.get()

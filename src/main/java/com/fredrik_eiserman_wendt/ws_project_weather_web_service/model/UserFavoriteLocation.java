@@ -1,6 +1,7 @@
 package com.fredrik_eiserman_wendt.ws_project_weather_web_service.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,8 +15,9 @@ public class UserFavoriteLocation {
     private double longitude;
     private double latitude;
     
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "users_id", referencedColumnName = "id")
+    @JsonBackReference
     private User user;
     
     
@@ -67,6 +69,12 @@ public class UserFavoriteLocation {
     
     public User getUser() {
         return user;
+    }
+    
+    
+    public void setUser(User user) {
+        if (user != null)
+        this.user = user;
     }
     
     

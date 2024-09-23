@@ -4,7 +4,9 @@ import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.User;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.UserFavoriteLocation;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,9 +20,16 @@ public class UserService {
     }
     
     
+    
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+    
+    
     // TODO: 2024-09-22 optional
-    public User findById(Long id) {
-        return findById(id);
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+        
     }
     
     
@@ -29,33 +38,37 @@ public class UserService {
         return userRepository.save(user);
     }
     
-    
+    @Transactional
     public User addFavoriteLocation(Long id, UserFavoriteLocation location) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        User user;
+//        return userRepository.findById(id)
+//                .map(user -> {
+//                    user.addLocationToList(location);
+//                    userRepository.save(user);
+//                    return user;
+//                });
         
-        if (optionalUser.isEmpty()) {
-            return user = null;
+        Optional<User> optionalUser = findById(id);
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+            location.setUser(user);
+            user.addLocationToList(location);
+            System.out.println(user.getFavoriteLocations());
+            return userRepository.save(user);
         }
-        
-        user = optionalUser.get();
-        user.addLocationToList(location);
-        return userRepository.save(user);
+        return null;
     }
     
     
-    public User deleteUser(Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        User user;
+    public Optional<User> deleteUser(Long id) {
         
-        if (optionalUser.isEmpty()) {
-            return user = null;
-        }
+        return userRepository.findById(id)
+                .map(user -> {
+                    userRepository.delete(user);
+                    return user;
+                });
         
-        userRepository.deleteById(optionalUser.get().getId());
-        
-        return optionalUser.get();
     }
     
+
     
 }

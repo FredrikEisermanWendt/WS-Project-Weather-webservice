@@ -2,11 +2,11 @@ package com.fredrik_eiserman_wendt.ws_project_weather_web_service.controller;
 
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.User;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.UserFavoriteLocation;
-import com.fredrik_eiserman_wendt.ws_project_weather_web_service.repository.UserRepository;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.service.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -21,43 +21,42 @@ public class UserController {
     
     
     @GetMapping
-    public User getUserById(Long id) {
-        return userService.findById(id);
+    public ResponseEntity<List<User>> getAllUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
     }
     
     
-    @PostMapping
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        return userService.findById(id)
+                .map(user -> ResponseEntity.ok(user))
+                .orElse(ResponseEntity.notFound().build());
+    }
+    
+    
+    @PostMapping()
     public ResponseEntity<User> postUser(@RequestBody User user) {
         return ResponseEntity.status(201).body(userService.saveUser(user));
     }
     
     
     @PutMapping("/{id}")
-    public ResponseEntity<User> putUserFavoriteLocation(@PathVariable("id") Long id, @RequestBody UserFavoriteLocation location) {
-        User user = userService.addFavoriteLocation(id, location);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(user);
+    public ResponseEntity<User> putUserFavoriteLocation(@PathVariable("id") Long id, @RequestBody(required = true) UserFavoriteLocation location) {
+//        return userService.addFavoriteLocation(id, location)
+//                .map(user -> ResponseEntity.ok(user))
+//                .orElse(ResponseEntity.notFound().build());
+        
+        return ResponseEntity.ok(userService.addFavoriteLocation(id, location));
     }
     
     
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable("id") Long id){
-        User user = userService.deleteUser(id);
-        
-        if (user == null){
-            return ResponseEntity.notFound().build();
-        }
-        
-        return ResponseEntity.ok(user);
+    public ResponseEntity<User> deleteUser(@PathVariable("id") Long id) {
+        return userService.deleteUser(id)
+                .map(user -> ResponseEntity.ok(user))
+                .orElse(ResponseEntity.notFound().build());
         
     }
-    
-    
-    
-    
-    
     
     
 }
