@@ -3,6 +3,7 @@ package com.fredrik_eiserman_wendt.ws_project_weather_web_service.controller;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.User;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.UserFavoriteLocation;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +15,14 @@ public class UserController {
     
     UserService userService;
     
-    
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
     
     
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
     
@@ -29,7 +30,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         return userService.findById(id)
-                .map(user -> ResponseEntity.ok(user))
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
     
@@ -42,18 +43,16 @@ public class UserController {
     
     @PutMapping("/{id}")
     public ResponseEntity<User> putUserFavoriteLocation(@PathVariable("id") Long id, @RequestBody(required = true) UserFavoriteLocation location) {
-//        return userService.addFavoriteLocation(id, location)
-//                .map(user -> ResponseEntity.ok(user))
-//                .orElse(ResponseEntity.notFound().build());
-        
-        return ResponseEntity.ok(userService.addFavoriteLocation(id, location));
+        return userService.addFavoriteLocation(id, location)
+                .map(user -> ResponseEntity.status(200).body(user))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
     
     
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable("id") Long id) {
         return userService.deleteUser(id)
-                .map(user -> ResponseEntity.ok(user))
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
         
     }

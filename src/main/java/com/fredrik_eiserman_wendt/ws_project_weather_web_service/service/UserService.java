@@ -3,6 +3,7 @@ package com.fredrik_eiserman_wendt.ws_project_weather_web_service.service;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.User;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.UserFavoriteLocation;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,7 @@ public class UserService {
     
     private UserRepository userRepository;
     
-    
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -39,23 +40,13 @@ public class UserService {
     
     // TODO: 2024-09-23 test cleaner code
     @Transactional
-    public User addFavoriteLocation(Long id, UserFavoriteLocation location) {
-//        return userRepository.findById(id)
-//                .map(user -> {
-//                    user.addLocationToList(location);
-//                    userRepository.save(user);
-//                    return user;
-//                });
-        
-        Optional<User> optionalUser = findById(id);
-        if (optionalUser.isPresent()){
-            User user = optionalUser.get();
+    public Optional<User> addFavoriteLocation(Long id, UserFavoriteLocation location) {
+        return findById(id).map(user -> {
             location.setUser(user);
             user.addLocationToList(location);
-            System.out.println(user.getFavoriteLocations());
-            return userRepository.save(user);
-        }
-        return null;
+            userRepository.save(user);
+            return user;
+        });
     }
     
     

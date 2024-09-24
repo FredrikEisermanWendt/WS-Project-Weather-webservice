@@ -74,7 +74,7 @@ public class UserFavoriteLocation {
     
     public void setUser(User user) {
         if (user != null)
-        this.user = user;
+            this.user = user;
     }
     
     

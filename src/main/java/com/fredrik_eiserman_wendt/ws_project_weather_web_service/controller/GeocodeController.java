@@ -2,14 +2,11 @@ package com.fredrik_eiserman_wendt.ws_project_weather_web_service.controller;
 
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.LocationModel;
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.service.GeoCodeService;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -19,10 +16,11 @@ public class GeocodeController {
     
     GeoCodeService geoCodeService;
     
-    
+    @Autowired
     public GeocodeController(GeoCodeService geoCodeService) {
         this.geoCodeService = geoCodeService;
     }
+    
     
     @GetMapping("/locations/{countrycode}/{city}")
     public Mono<ResponseEntity<List<LocationModel>>> fetchLocations(@PathVariable("countrycode") String countryCode,
@@ -35,10 +33,6 @@ public class GeocodeController {
                     return Mono.just(ResponseEntity.notFound().build());
                 });
     }
-    
-    
-    
-    
     
     
 }

@@ -1,19 +1,14 @@
 package com.fredrik_eiserman_wendt.ws_project_weather_web_service.service;
 
 import com.fredrik_eiserman_wendt.ws_project_weather_web_service.model.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WeatherService {
@@ -23,7 +18,7 @@ public class WeatherService {
     private WebClient webClient;
     private static final String WEATHER_API_BASE_URL = "https://api.open-meteo.com/v1/forecast";
     
-    
+    @Autowired
     public WeatherService(GeoCodeService geoCodeService, WebClient.Builder webClientBuilder, UserService userService) {
         this.geoCodeService = geoCodeService;
         this.webClient = webClientBuilder

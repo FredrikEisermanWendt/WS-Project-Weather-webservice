@@ -293,6 +293,7 @@ public class WeatherModel {
         
     }
     
+    
     public class Daily {
         
         public List<String> time;
@@ -383,7 +384,6 @@ public class WeatherModel {
         public void setWind_direction_10m_dominant(List<Integer> wind_direction_10m_dominant) {
             this.wind_direction_10m_dominant = wind_direction_10m_dominant;
         }
-        
         
         
     }
