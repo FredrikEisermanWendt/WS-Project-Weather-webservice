@@ -37,6 +37,3 @@ out/
 .vscode/
 
 ### Sensetivie information ###
-src/main/resources/application.properties
-src/main/resources/mykeystore.p12
-
