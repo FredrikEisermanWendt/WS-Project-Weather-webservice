@@ -4,6 +4,10 @@ FROM gradle:8.10-jdk21 AS builder
 # Set working directory
 WORKDIR /app
 
+# Copy the keystore file into the container
+COPY src/main/resources/mykeystore.p12 /app/resources/mykeystore.p12
+
+
 # Copy Gradle wrapper files
 COPY build.gradle settings.gradle /app/
 COPY gradle /app/gradle
